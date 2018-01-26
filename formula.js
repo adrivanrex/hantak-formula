@@ -47,29 +47,33 @@ function playGame(playerOne,playerTwo){
 		return "invalid bet";
 	}
 
-	let firstCoin = getPhase();
-	let secondCoin = getPhase();
+	var firstCoin = getPhase();
+	var secondCoin = getPhase();
 
 	let winningCoin = getPatternWin(firstCoin,secondCoin);
 
 	coinWinner = getCoinWinner(winningCoin);
 	bets = [playerOne,playerTwo];
 
-	var winner = [];
+	var output = [];
 
 	for (var i = bets.length - 1; i >= 0; i--) {
 		if(bets[i].bet == coinWinner){
-			winner.push(bets[i]);
+			bets[i].status = "win";
+			output.push(bets[i]);
 		}
 
 	}
 
-	if(winner.length == 0){
-		winner = "draw";
+	if(output.length == 0){
+		output = {
+			firstCoin: firstCoin,
+			secondCoin: secondCoin,
+			status: "draw"}
 	}
 	
 
-	return winner;
+	return output;
 
 
 }
